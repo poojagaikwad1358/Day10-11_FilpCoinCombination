@@ -35,3 +35,49 @@ headper=$((100*$heads/$n))
 echo "Head Percentage ="$headper"%"
 tailper=$((100*$tails/$n))
 echo "Tail Percentage ="$tailper"%"
+
+#UseCase3- As a simulator, loop to create a Doublet Combination.
+           #Store the doublet combination as well as the percentage.
+
+read -p "Enter number : " number
+
+i=1
+countHH=0
+countHT=0
+countTH=0
+countTT=0
+
+declare -A Doublet
+while [ $i -ne $number ]
+do
+	randomCheck=$(( (RANDOM%4)+1 ))
+	if [ $randomCheck -eq 1 ]
+	then
+		Doublet[$i]="HH"
+		((countHH++))
+
+	elif [ $randomCheck -eq 2 ]
+	then
+		Doublet[$i]="HT"
+		((countHT++))
+	elif [ $randomCheck -eq 3 ]
+	then
+		Doublet[$i]="TH"
+		((countTH++))
+	else [ $randomCheck -eq 4 ]
+
+		Doublet[$i]="TT"
+		((countTT++))
+	fi
+	((i++))
+done
+echo ${Doublet[*]}
+dupletHHPer=`echo $countHH $number | awk -F" " '{ a=$1; b=$2; result1=(a/b*100); print result1 }'`
+dupletTTPer=`echo $countTT $number | awk -F" " '{ a=$1; b=$2; result2=(a/b*100); print result2 }'`
+dupletTHPer=`echo $countTH $number | awk -F" " '{ a=$1; b=$2; result3=(a/b*100); print result3 }'`
+dupletHTPer=`echo $countHT $number | awk -F" " '{ a=$1; b=$2; result4=(a/b*100); print result4 }'`
+
+echo Percentage of HH : $dupletHHPer%
+echo Percentage of TT : $dupletTTPer%
+echo Percentage of TH : $dupletTHPer%
+echo Percentage of HT : $dupletHTPer%
