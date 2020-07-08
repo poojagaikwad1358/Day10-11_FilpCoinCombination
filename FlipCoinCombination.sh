@@ -155,3 +155,35 @@ echo Percentage of TTH : $tripletTTHPer%
 echo Percentage of THT : $tripletTHTPer%
 echo Percentage of HTT : $tripletHTTPer%
 
+#UseCase5 - As a simulator, sort the Singlet, Doublet and
+	    #Triplet combination and show the winning combination.
+
+echo Doublet Sorting
+arrayDoublet=($(for value in ${Doublet[@]}
+do
+    echo Values: $value
+done | sort ))
+max=${arrayDoublet[3]}
+
+for key in ${!Doublet[@]}
+do
+    if [[ $max -eq ${Doublet[$key]} ]]
+    then
+    echo "win combo $key"
+    fi
+done
+
+echo Triplet Sorting
+arrayTriplet=($(for value in ${Triplet[@]}
+do
+    echo Values: $value
+done | sort ))
+max=${arrayTriplet[7]}
+
+for key in ${!Triplet[@]}
+do
+    if [[ $max -eq ${Triplet[$key]} ]]
+    then
+    echo "win combo $key"
+    fi
+done
