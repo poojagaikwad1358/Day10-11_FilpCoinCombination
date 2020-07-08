@@ -81,3 +81,77 @@ echo Percentage of HH : $dupletHHPer%
 echo Percentage of TT : $dupletTTPer%
 echo Percentage of TH : $dupletTHPer%
 echo Percentage of HT : $dupletHTPer%
+
+#UseCase4- As a simulator,do the same for triplet combination.
+
+read -p "Enter number : " number
+echo case4
+i=1
+countHHH=0
+countHHT=0
+countHTH=0
+countTHH=0
+countTTT=0
+countTTH=0
+countTHT=0
+countHTT=0
+
+declare -A Triplet
+while [ $i -ne $number ]
+do
+        randomCheck=$(( (RANDOM%8)+1 ))
+        if [ $randomCheck -eq 1 ]
+        then
+                Triplet[$i]="HHH"
+                ((countHHH++))
+
+        elif [ $randomCheck -eq 2 ]
+        then
+                Triplet[$i]="HHT"
+                ((countHHT++))
+        elif [ $randomCheck -eq 3 ]
+        then
+                Triplet[$i]="HTH"
+                ((countHTH++))
+        elif [ $randomCheck -eq 4 ]
+	then
+                Triplet[$i]="THH"
+                ((countTHH++))
+	elif [ $randomCheck -eq 5 ]
+        then
+                Triplet[$i]="TTT"
+                ((countTTT++))
+	elif [ $randomCheck -eq 6 ]
+        then
+                Triplet[$i]="TTH"
+                ((countTTH++))
+	elif [ $randomCheck -eq 7 ]
+        then
+                Triplet[$i]="THT"
+                ((countTHT++))
+	else [ $randomCheck -eq 8 ]
+                Triplet[$i]="HTT"
+                ((countHTT++))
+        fi
+        ((i++))
+done
+echo ${Triplet[*]}
+
+tripletHHHPer=`echo $countHHH $number | awk -F" " '{ a=$1; b=$2; result1=(a/b*100); print result1 }'`
+tripletHHTPer=`echo $countHHT $number | awk -F" " '{ a=$1; b=$2; result2=(a/b*100); print result2 }'`
+tripletHTHPer=`echo $countHTH $number | awk -F" " '{ a=$1; b=$2; result3=(a/b*100); print result3 }'`
+tripletTHHPer=`echo $countTHH $number | awk -F" " '{ a=$1; b=$2; result4=(a/b*100); print result4 }'`
+tripletTTTPer=`echo $countTTT $number | awk -F" " '{ a=$1; b=$2; result5=(a/b*100); print result5 }'`
+tripletTTHPer=`echo $countTTH $number | awk -F" " '{ a=$1; b=$2; result6=(a/b*100); print result6 }'`
+tripletTHTPer=`echo $countTHT $number | awk -F" " '{ a=$1; b=$2; result7=(a/b*100); print result7 }'`
+tripletHTTPer=`echo $countHTT $number | awk -F" " '{ a=$1; b=$2; result4=(a/b*100); print result8 }'`
+
+echo Percentage of HHH : $tripletHHHPer%
+echo Percentage of HHT : $tripletHHTPer%
+echo Percentage of HTH : $tripletHTHPer%
+echo Percentage of THH : $tripletTHHPer%
+echo Percentage of TTT : $tripletTTTPer%
+echo Percentage of TTH : $tripletTTHPer%
+echo Percentage of THT : $tripletTHTPer%
+echo Percentage of HTT : $tripletHTTPer%
+
